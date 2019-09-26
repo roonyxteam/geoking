@@ -26,6 +26,7 @@
 <br>
 <br> 
 
+
 <div id="map" style="height: 500px; width: 500px;">
     
     </div>
@@ -36,20 +37,28 @@
             map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat:{{$lat}}, lng: {{$lng}}},
                 zoom: 20
+
             });
         }
     </script>
 
 </div> 
 
+<div id="info" style="height: 300px; width: 300px;">
+<p>Title:{{$name}}</p>
+
+<p>Address:{{$address
+}}</p>
+<p>Rate:{{$rating}}</p>
+
+<p>Total reviews:{{$total_rate}}</p> 
+
+</div>
+
 
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3guzpLs_LTMr4h364kIoSy-670C1mTEM&callback=initMap"
+ <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB3guzpLs_LTMr4h364kIoSy-670C1mTEM&callback=initMap"
     async defer></script>
 
 

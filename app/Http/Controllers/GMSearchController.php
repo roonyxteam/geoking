@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use App\Http\Requests\SearchRequest;
+use Khill\Lavacharts\Lavacharts;
 
 class GMSearchController extends Controller
 {
@@ -33,24 +34,29 @@ return view('search.index');
 public function search(SearchRequest $request) {
 
 $query = $request->get('query');
-$type = $request->get('type');
 $request = urlencode($query);
 
 $client = new \GuzzleHttp\Client();
 
-$response = $client->get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='.$query.'&inputtype=textquery&type='.$type.'&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyB3guzpLs_LTMr4h364kIoSy-670C1mTEM');
+$response = $client->get('https://maps.googleapis.com/maps/api/place/textsearch/json?query='.$query.'&key=AIzaSyB3guzpLs_LTMr4h364kIoSy-670C1mTEM');
+
+
 
 $searches = $response->getBody()->getContents();
 $data = json_decode($searches, true);
 
 
- $lat=$data ['candidates'][0]['geometry']['location']['lat']; 
- $lng=$data ['candidates'][0]['geometry']['location']['lng'];
- $rating=$data ['candidates'][0]['rating'];
+ $lat=$data ['results'][0]['geometry']['location']['lat']; 
+ $lng=$data ['results'][0]['geometry']['location']['lng'];
+ $address=$data ['results'][0]['formatted_address'];
+ $rating=$data ['results'][0]['rating'];
+ $name=$data ['results'][0]['name'];
+ $total_rate=$data ['results'][0]['user_ratings_total'];
+ $place_id=$data ['results'][0]['place_id'];
 
 
 
-return view('search.search')->with('searches', $searches)->with('query',$query)->with('lat',$lat)->with('lng',$lng)->with('rating',$rating);
+return view('search.search')->with('searches', $searches)->with('query',$query)->with('lat',$lat)->with('lng',$lng)->with('rating',$rating)->with('total_rate', $total_rate)->with('address', $address)->with('name', $name)->with('place_id',$place_id);
 
 
 }
