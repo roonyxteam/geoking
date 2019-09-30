@@ -26,39 +26,66 @@
 <br>
 <br> 
 
+<style>
+{
+  box-sizing: border-box;
+}
 
-<div id="map" style="height: 500px; width: 500px;">
-    
-    </div>
+#map {
+  width: 500px;
+  height: 400px;
+}
 
-    <script>
-        var map;
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat:{{$lat}}, lng: {{$lng}}},
-                zoom: 20
+#circle {
+  width: 100px;
+  height: 100px;
+  background: red;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+}
 
-            });
-        }
-    </script>
-
-</div> 
-
-<div id="info" style="height: 300px; width: 300px;">
-<p>Title:{{$name}}</p>
-
-<p>Address:{{$address
-}}</p>
-<p>Rate:{{$rating}}</p>
-
-<p>Total reviews:{{$total_rate}}</p> 
-
-</div>
+</style>
 
 
-</div>
-</div>
- <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB3guzpLs_LTMr4h364kIoSy-670C1mTEM&callback=initMap"
+<div id="map" style="height: 500px; width: 500px;"></div>
+
+<script type="text/javascript">
+
+
+     function initMap() {
+        var loc = {lat: {{$lat}}, lng: {{$lng}}};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: loc
+        });
+
+        var contentString = 
+            "<div id='bodyContent'><p>Rate:{{$rating}} Total reviews:{{$total_rate}}</p></div>";
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+        var marker = new google.maps.Marker({
+          position: loc,
+          map: map
+        });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+      }
+
+
+
+</script>
+
+
+
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3guzpLs_LTMr4h364kIoSy-670C1mTEM&callback=initMap&libraries=places"
     async defer></script>
 
 

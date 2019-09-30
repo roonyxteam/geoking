@@ -10,6 +10,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use App\Http\Requests\SearchRequest;
 use Khill\Lavacharts\Lavacharts;
+use Image;
 
 class GMSearchController extends Controller
 {
@@ -50,16 +51,24 @@ $data = json_decode($searches, true);
  $lng=$data ['results'][0]['geometry']['location']['lng'];
  $address=$data ['results'][0]['formatted_address'];
  $rating=$data ['results'][0]['rating'];
- $name=$data ['results'][0]['name'];
  $total_rate=$data ['results'][0]['user_ratings_total'];
- $place_id=$data ['results'][0]['place_id'];
 
 
 
-return view('search.search')->with('searches', $searches)->with('query',$query)->with('lat',$lat)->with('lng',$lng)->with('rating',$rating)->with('total_rate', $total_rate)->with('address', $address)->with('name', $name)->with('place_id',$place_id);
+return view('search.search')->with('searches', $searches)->with('query',$query)->with('lat',$lat)->with('lng',$lng)->with('rating',$rating)->with('total_rate', $total_rate)->with('address', $address)->with('data', $data);
 
 
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
