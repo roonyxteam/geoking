@@ -30,42 +30,6 @@ return view('search.index');
 }
 
 
-public function search1(SearchRequest $request) {
-
-$query = $request->get('query');
-$request = urlencode($query);
-
-$client = new \GuzzleHttp\Client();
-
-$response = $client->get('https://maps.googleapis.com/maps/api/place/textsearch/json?query='.$query.'&key=AIzaSyB3guzpLs_LTMr4h364kIoSy-670C1mTEM');
-
- foreach ($response['results'] as $place_id)
- {
-     $googleID = $place_id['place_id'];
- };
-
-$searches = $response->getBody()->getContents();
-$data = json_decode($searches, true);
-
-
- $lat=$data ['results'][0]['geometry']['location']['lat']; 
- $lng=$data ['results'][0]['geometry']['location']['lng'];
- $address=$data ['results'][0]['formatted_address'];
- $rating=$data ['results'][0]['rating'];
- $total_rate=$data ['results'][0]['user_ratings_total'];
- $review =$data ['results'][0]['rating']['reviews']['author_name'];
-
- 
-        
-
-return view('search.search1')->with('searches', $searches)->with('query',$query)->with('lat',$lat)->with('lng',$lng)->with('rating',$rating)->with('total_rate', $total_rate)->with('address', $address)->with('data', $data)->with('data_arr',$data_arr)->with('review',$review);
-
-
-
-}
-
-
-
 
 public function search(SearchRequest $request) {
 
@@ -110,10 +74,6 @@ $info2 = json_decode($searches2, true);
  };
 
 
-$color="color:";
-$red= "red";
-
-
 $baseUrl="http://lara.local";
 $cloud = new TagCloud();
 $cloud->addString($cloud_text);
@@ -122,7 +82,7 @@ $cloud->addString($cloud_rating);
 $cloud->addString($cloud_user_rating);
 
 
-return view('search.search')->with('query',$query)->with('info1',$info1)->with('info2',$info2)->with('cloud',$cloud)->with("color",$color)->with("red",$red);
+return view('search.search')->with('query',$query)->with('info1',$info1)->with('info2',$info2)->with('cloud',$cloud);
 
 
 }
