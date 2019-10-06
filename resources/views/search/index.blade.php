@@ -13,7 +13,6 @@
 </span>
 @endif
 <input type="search" name="query" id="query" placeholder="restaurants amsterdam" type="search">
-
 </div>
 <div class="form-group">
 <input id="btn-submit" class="btn btn-send-message btn-md" value="Search" type="submit">

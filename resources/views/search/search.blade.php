@@ -36,16 +36,20 @@
   height: 400px;
 }
 
-#circle {
-  width: 100px;
-  height: 100px;
-  background: red;
-  -moz-border-radius: 50px;
-  -webkit-border-radius: 50px;
-  border-radius: 50px;
+
+#google-reviews {
+display:flex;
+flex-wrap:wrap;
+display: grid;
+grid-template-columns: repeat( auto-fit, minmax(320px, 1fr));*/
 }
 
+
+
 </style>
+
+ 
+
 
 
 <div id="map" style="height: 500px; width: 500px;"></div>
@@ -53,42 +57,132 @@
 <script type="text/javascript">
 
 
-     function initMap() {
-        var loc = {lat: {{$lat}}, lng: {{$lng}}};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: loc
+function initMap() {
+
+
+var locations = [
+
+@foreach ( $info1['results'] as $loc) 
+
+["{!! $loc['rating']!!}", 
+{!! $loc['geometry']['location']['lat']!!},
+{!! $loc['geometry']['location']['lng']!!},
+],
+          
+@endforeach 
+];
+
+
+
+
+var loc = {lat:  {!! $info1['results'][0]['geometry']['location']['lat'] !!}, lng:  {!! $info1['results'][0]['geometry']['location']['lng'] !!}};
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+         zoom: 12,
+         center: loc,
+         mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow;
+
+    var marker, i;
+    var mtitle ="@php echo $query; @endphp";
+    for (i = 0; i < locations.length; i++) {  
+        marker = new google.maps.Marker({
+             position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+             map: map,
+             label: locations[i][0],
+             title: mtitle,
+             icon: {
+
+@foreach ( $info1['results'] as $loc) 
+
+@if($loc['rating']<=1.5 || $loc['rating']<=3)
+ 
+@php
+echo "fillColor:'red',";
+@endphp
+@break
+
+
+@elseif($loc['rating']<=2.5 || $loc['rating']<=3.9)
+ 
+@php
+echo "fillColor:'yellow',";
+@endphp
+@break
+
+
+@elseif($loc['rating']<=4.0 || $loc['rating']<=4.5)
+ 
+@php
+echo "fillColor:'light green', ";
+@endphp
+@break
+
+
+@elseif($loc['rating']<=4.6 || $loc['rating']<=5)
+@php
+echo "fillColor:'green', ";
+@endphp
+@break
+
+@endif
+
+@endforeach    
+
+                           
+             fillOpacity: 0.5,                    
+             path: google.maps.SymbolPath.CIRCLE, 
+             scale: 26,                           
+             strokeColor: "#000099",              
+             strokeWeight: 1.0                  
+         }
+         
         });
 
-        var contentString = 
-            "<div id='bodyContent'><p>Rate:{{$rating}} Total reviews:{{$total_rate}}</p></div>";
-
-        var infowindow = new google.maps.InfoWindow({
-          content: contentString
-        });
-
-        var marker = new google.maps.Marker({
-          position: loc,
-          map: map
-        });
-        marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
-      }
-
-
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+             return function() {
+                 infowindow.setContent(locations[i][0]);
+                 infowindow.open(map, marker);
+             }
+        })(marker, i));
+    }
+  
+}
 
 </script>
-
-
-
-
-
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3guzpLs_LTMr4h364kIoSy-670C1mTEM&callback=initMap&libraries=places"
     async defer></script>
 
+<div class="tagcloud01">
+<ul>
+<li>performance testing
+ @php
+echo $cloud->render();
+@endphp
+</li>
+</ul>
+</div>
+
+
+@foreach ( $info2['result']['reviews'] as $review)
+<div id="google-reviews">
+<b>Author:{!! $review['author_name']!!}<br>
+ <img src="{!! $review['profile_photo_url']!!}" alt="{!! $review['author_name']!!}" height="42" width="42"> <br>
+ </b><i>{!! $review['text']!!} </i><br>User Rating </b><h5>{!! $review['rating']!!}</h5>
+</div>
+@endforeach 
+
+
+
+
+
 
 @endsection
  
+
+
+
 
