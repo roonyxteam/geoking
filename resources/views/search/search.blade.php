@@ -97,7 +97,7 @@ var loc = {lat:  {!! $info1['results'][0]['geometry']['location']['lat'] !!}, ln
 
 @foreach ( $info1['results'] as $loc) 
 
-@if($loc['rating']<=1.5 || $loc['rating']<=3)
+@if($loc['rating']<=1 || $loc['rating']<=3.2)
  
 @php
 echo "fillColor:'red',";
@@ -105,27 +105,23 @@ echo "fillColor:'red',";
 @break
 
 
-@elseif($loc['rating']<=2.5 || $loc['rating']<=3.9)
+@elseif($loc['rating']<=3.3 || $loc['rating']<=4)
  
 @php
-echo "fillColor:'yellow',";
+echo "fillColor:'orange',";
 @endphp
 @break
 
 
-@elseif($loc['rating']<=4.0 || $loc['rating']<=4.5)
+@elseif($loc['rating']<=4.1 || $loc['rating']<=5)
  
-@php
-echo "fillColor:'light green', ";
-@endphp
-@break
-
-
-@elseif($loc['rating']<=4.6 || $loc['rating']<=5)
 @php
 echo "fillColor:'green', ";
 @endphp
 @break
+
+
+
 
 @endif
 
