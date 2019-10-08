@@ -61,8 +61,9 @@
 
 
                             var loc = {
-                                lat:  {!! $info1['results'][0]['geometry']['location']['lat'] !!},
-                                lng:  {!! $info1['results'][0]['geometry']['location']['lng'] !!}};
+                                lat:  @if(isset($info1['results'][0])){!! $info1['results'][0]['geometry']['location']['lat'] !!}@else 0 @endif,
+                                lng:  @if(isset($info1['results'][0])){!! $info1['results'][0]['geometry']['location']['lng'] !!}@else 0 @endif
+                            };
 
                             var map = new google.maps.Map(document.getElementById('map'), {
                                 zoom: 12,

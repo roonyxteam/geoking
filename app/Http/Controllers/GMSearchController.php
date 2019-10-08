@@ -81,7 +81,13 @@ class GMSearchController extends Controller
 
             return view('search.search')->with('query', $query)->with('info1', $info1)->with('info2', $info2)->with('cloud', $cloud);
         }else{
-            return view('search.search')->with('query', $query)->with('info1', ['results' => []])->with('info2', ['results' => []])->with('cloud', null);
+//            return '';
+            $cloud = new TagCloud();
+            $cloud->addString('');
+            $cloud->addString('');
+            $cloud->addString('');
+            $cloud->addString('');
+            return view('search.search')->with('query', $query)->with('info1', ['results' => []])->with('info2', ['results' => []])->with('cloud', $cloud);
         }
 
     }
