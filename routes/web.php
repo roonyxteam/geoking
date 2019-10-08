@@ -15,5 +15,5 @@
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/gm_index', 'GMSearchController@index')->name('gm_imdex');
+Route::get('/gm_index', 'GMSearchController@index')->name('gm_index');
 Route::get('search', 'GMSearchController@search')->name('search');
