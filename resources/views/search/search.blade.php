@@ -78,11 +78,11 @@
                             var mtitle = "@php echo $query; @endphp";
                             for (i = 0; i < locations.length; i++) {
                                 var spotColorStyle = "";
-                                if (locations[i][0] >=1 && locations[i][0] < 3.2) {
+                                if (locations[i][0] >=1 && locations[i][0] <= 3.2) {
                                     spotColorStyle = "red";
-                                } else if (locations[i][0] >=3.3 && locations[i][0] < 4) {
+                                } else if (locations[i][0] >=3.3 && locations[i][0] <= 4) {
                                     spotColorStyle = "orange";
-                                } else if (locations[i][0] >=4.1 && locations[i][0] < 5) {
+                                } else if (locations[i][0] >=4.1 && locations[i][0] <= 5) {
                                     spotColorStyle = "green";
                                 }
                                 marker = new google.maps.Marker({
