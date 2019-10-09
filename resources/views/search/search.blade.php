@@ -22,7 +22,9 @@
                 </form>
                 <div class="container">
 
-                    <h4>Query: <i>{{$query}} </i></h4>
+                    <h4>Query:
+                        <i>{{$query}} </i>
+                    </h4>
                     <br>
                     <br>
 
@@ -42,7 +44,6 @@
                             flex-wrap: wrap;
                             display: grid;
                             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-                            */
                         }
                     </style>
 
@@ -76,46 +77,21 @@
                             var marker, i;
                             var mtitle = "@php echo $query; @endphp";
                             for (i = 0; i < locations.length; i++) {
+                                var spotColorStyle = "";
+                                if (locations[i][0] >=1 && locations[i][0] < 3.2) {
+                                    spotColorStyle = "red";
+                                } else if (locations[i][0] >=3.3 && locations[i][0] < 4) {
+                                    spotColorStyle = "orange";
+                                } else if (locations[i][0] >=4.1 && locations[i][0] < 5) {
+                                    spotColorStyle = "green";
+                                }
                                 marker = new google.maps.Marker({
                                     position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                                     map: map,
                                     label: locations[i][0],
                                     title: mtitle,
                                     icon: {
-
-                                        @foreach ( $info1['results'] as $loc)
-
-                                                @if(isset($loc['rating']) && ($loc['rating']<=1 || $loc['rating']<=3.2))
-
-                                                @php
-                                                    echo "fillColor:'red',";
-                                                @endphp
-                                                @break
-
-
-                                                @elseif(isset($loc['rating']) && ($loc['rating']<=3.3 || $loc['rating']<=4))
-
-                                                @php
-                                                    echo "fillColor:'orange',";
-                                                @endphp
-                                                @break
-
-
-                                                @elseif(isset($loc['rating']) && ($loc['rating']<=4.1 || $loc['rating']<=5))
-
-                                                @php
-                                                    echo "fillColor:'green', ";
-                                                @endphp
-                                                @break
-
-
-
-
-                                                @endif
-
-                                                @endforeach
-
-
+                                        fillColor: spotColorStyle,
                                         fillOpacity: 0.5,
                                         path: google.maps.SymbolPath.CIRCLE,
                                         scale: 26,
