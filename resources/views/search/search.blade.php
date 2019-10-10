@@ -99,7 +99,7 @@
                     </script>
 
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3guzpLs_LTMr4h364kIoSy-670C1mTEM&callback=initMap&libraries=places"
-                            async defer></script>
+                            async ></script>
 
 
                     <div class = "container mt-5">
