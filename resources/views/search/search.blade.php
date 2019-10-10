@@ -68,7 +68,6 @@
                                 } else if (locations[i][0] >=4.1 && locations[i][0] <= 5) {
                                     spotColorStyle = "green";
                                 }
-                                // console.log('---->', locations[i][1], locations[i][2]);
                                 marker = new google.maps.Marker({
                                     position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                                     map: map,
@@ -84,7 +83,6 @@
                                     }
 
                                 });
-                                console.log('latLNG', marker);
 
                                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
                                     return function () {
@@ -99,8 +97,7 @@
                     </script>
 
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3guzpLs_LTMr4h364kIoSy-670C1mTEM&callback=initMap&libraries=places"
-                            async ></script>
-
+                            defer ></script>
 
                     <div class = "container mt-5">
                         <h2 class = "center">Search Places</h2>
@@ -174,6 +171,15 @@
                                                                                                                             {!! $review['text'] !!}
                                                                                                                             <div></b>
                                                                                                                                 <h4>@if(isset($review['rating']))
+                                                                                                                                        <span class="glyphicon glyphicon-star
+                                                                                                                                                @if($review['rating']>=1 && $review['rating'] <= 3.2)
+                                                                                                                                                    text-danger
+                                                                                                                                                @elseif($review['rating'] > 3.2 && $review['rating'] <= 4)
+                                                                                                                                                    text-warning
+                                                                                                                                                @elseif($review['rating'] > 4 && $review['rating'] <= 5)
+                                                                                                                                                    text-success
+                                                                                                                                                @endif">
+                                                                                                                                        </span>
                                                                                                                                         {!! $review['rating']!!}
                                                                                                                                     @endif
                                                                                                                                 </h4>

@@ -51,8 +51,8 @@ class GMSearchController extends Controller
                 $response2 = $client->get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' . $google_id . '&key=AIzaSyB3guzpLs_LTMr4h364kIoSy-670C1mTEM');
                 $searches2 = $response2->getBody()->getContents();
                 $info2 = json_decode($searches2, true);
-                $info1['results'][$ind]['reviews'] = $info2['result']['reviews'];
-                $info1['results'][$ind]['reviews_count'] = count($info2['result']['reviews']);
+                $info1['results'][$ind]['reviews'] = (!empty($info2['result']['reviews']))?$info2['result']['reviews']:[];
+                $info1['results'][$ind]['reviews_count'] = (!empty($info2['result']['reviews']))?count($info2['result']['reviews']):0;
             };
 
             foreach ($info1['results'] as $cloud) {
