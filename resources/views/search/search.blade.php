@@ -122,7 +122,7 @@
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-5">
                                 <div class="card">
                                     <div class="card-body">
                                         <h3 class="card-title">Locations</h3>
@@ -223,10 +223,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-7">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div id="map" style="height: 500px; width: 500px;"></div>
+                                        <div id="map" style="height: 500px; width: 590px;"></div>
                                     </div>
                                 </div>
                             </div>
