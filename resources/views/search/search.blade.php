@@ -128,13 +128,6 @@
                             <div class="col-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div id="map" style="height: 500px; width: 500px;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="card">
-                                    <div class="card-body">
                                         <h3 class="card-title">Locations</h3>
                                         <div class="tagcloud01">
                                             <ul>
@@ -180,11 +173,10 @@
                                                                                                                             <h5 class="mt-0 mb-1">{!! $review['author_name']!!}</h5>
                                                                                                                             {!! $review['text'] !!}
                                                                                                                             <div></b>
-                                                                                                                                <h5>@if(isset($review['rating']))
-                                                                                                                                        Rating:
+                                                                                                                                <h4>@if(isset($review['rating']))
                                                                                                                                         {!! $review['rating']!!}
                                                                                                                                     @endif
-                                                                                                                                </h5>
+                                                                                                                                </h4>
                                                                                                                             </div>
                                                                                                                         </div>
                                                                                                                     </li>
@@ -222,6 +214,13 @@
                                             </ul>
                                         </div>
 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div id="map" style="height: 500px; width: 500px;"></div>
                                     </div>
                                 </div>
                             </div>
