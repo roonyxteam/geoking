@@ -45,12 +45,10 @@ class GMSearchController extends Controller
         $searches1 = $response1->getBody()->getContents();
         $info1 = json_decode($searches1, true);
 
-//        var_dump($info1['results']);die;
         if(!empty($info1['results'])) {
             foreach ($info1['results'] as $ind => $place_id) {
                 $google_id = $place_id['place_id'];
                 $response2 = $client->get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' . $google_id . '&key=AIzaSyB3guzpLs_LTMr4h364kIoSy-670C1mTEM');
-//                var_dump('https://maps.googleapis.com/maps/api/place/details/json?placeid=' . $google_id . '&key=AIzaSyB3guzpLs_LTMr4h364kIoSy-670C1mTEM');die;
                 $searches2 = $response2->getBody()->getContents();
                 $info2 = json_decode($searches2, true);
                 $info1['results'][$ind]['reviews'] = $info2['result']['reviews'];
@@ -75,8 +73,6 @@ class GMSearchController extends Controller
             $cloud->addString($query);
             $cloud->addString($cloud_rating);
             $cloud->addString($cloud_user_rating);
-//var_dump($info1['results'][0]['reviews']);die;
-//var_dump($info2['result']['reviews']);die;
 
             return view('search.search')->with('query', $query)->with('info1', $info1)->with('info2', $info2)->with('cloud', $cloud);
         }else{
