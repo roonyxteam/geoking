@@ -128,6 +128,13 @@
                             <div class="col-6">
                                 <div class="card">
                                     <div class="card-body">
+                                        <div id="map" style="height: 500px; width: 500px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
                                         <h3 class="card-title">Locations</h3>
                                         <div class="tagcloud01">
                                             <ul>
@@ -171,18 +178,10 @@
                                                                                                                              height="42" width="42" class="mr-3" >
                                                                                                                         <div class="media-body">
                                                                                                                             <h5 class="mt-0 mb-1">{!! $review['author_name']!!}</h5>
-                                                                                                                            {!! $review['text']!!}
+                                                                                                                            {!! $review['text'] !!}
                                                                                                                             <div></b>
                                                                                                                                 <h5>@if(isset($review['rating']))
-                                                                                                                                            <span class="glyphicon glyphicon-star
-                                                                                                                                                @if($review['rating']>=1 && $review['rating'] <= 3.2)
-                                                                                                                                                    text-danger
-                                                                                                                                                @elseif($review['rating'] > 3.2 && $review['rating'] <= 4)
-                                                                                                                                                    text-warning
-                                                                                                                                                @elseif($review['rating'] > 4 && $review['rating'] <= 5)
-                                                                                                                                                    text-success
-                                                                                                                                                @endif">
-                                                                                                                                            </span>
+                                                                                                                                        Rating:
                                                                                                                                         {!! $review['rating']!!}
                                                                                                                                     @endif
                                                                                                                                 </h5>
@@ -223,13 +222,6 @@
                                             </ul>
                                         </div>
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div id="map" style="height: 500px; width: 500px;"></div>
                                     </div>
                                 </div>
                             </div>
